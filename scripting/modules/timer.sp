@@ -1,5 +1,5 @@
 void Timer_ShowWinPanel(int userId) {
-    CreateTimer(TIMER_WIN_PANEL, Timer_OnShowWinPanel, userId, TIMER_WIN_PANEL_FLAGS);
+    CreateTimer(TIMER_WIN_PANEL_DELAY, Timer_OnShowWinPanel, userId, TIMER_WIN_PANEL_FLAGS);
 }
 
 public Action Timer_OnShowWinPanel(Handle timer, int userId) {
