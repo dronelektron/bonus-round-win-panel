@@ -28,14 +28,14 @@ void Event_ResetWinTeam() {
 }
 
 void Event_Create() {
-    HookEvent("dod_round_win", Event_RoundWin);
-    HookEvent("dod_round_start", Event_RoundStart);
-    HookEvent("dod_win_panel", Event_WinPanel);
-    HookEvent("player_spawn", Event_PlayerSpawn);
+    HookEvent(EVENT_ROUND_WIN, Event_RoundWin);
+    HookEvent(EVENT_ROUND_START, Event_RoundStart);
+    HookEvent(EVENT_WIN_PANEL, Event_WinPanel);
+    HookEvent(EVENT_PLAYER_SPAWN, Event_PlayerSpawn);
 }
 
 public void Event_RoundWin(Event event, const char[] name, bool dontBroadcast) {
-    g_winTeam = event.GetInt("team");
+    g_winTeam = event.GetInt(KEY_TEAM);
 }
 
 public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast) {
@@ -43,24 +43,24 @@ public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 }
 
 public void Event_WinPanel(Event event, const char[] name, bool dontBroadcast) {
-    g_showTimerDefend = event.GetBool("show_timer_defend");
-    g_showTimerAttack = event.GetBool("show_timer_attack");
-    g_timerTime = event.GetInt("timer_time");
-    g_finalEvent = event.GetInt("final_event");
-    g_categoryLeft = event.GetInt("category_left");
-    g_left1 = event.GetInt("left_1");
-    g_leftScore1 = event.GetInt("left_score_1");
-    g_left2 = event.GetInt("left_2");
-    g_leftScore2 = event.GetInt("left_score_2");
-    g_left3 = event.GetInt("left_3");
-    g_leftScore3 = event.GetInt("left_score_3");
-    g_categoryRight = event.GetInt("category_right");
-    g_right1 = event.GetInt("right_1");
-    g_rightScore1 = event.GetInt("right_score_1");
-    g_right2 = event.GetInt("right_2");
-    g_rightScore2 = event.GetInt("right_score_2");
-    g_right3 = event.GetInt("right_3");
-    g_rightScore3 = event.GetInt("right_score_3");
+    g_showTimerDefend = event.GetBool(KEY_SHOW_TIMER_DEFEND);
+    g_showTimerAttack = event.GetBool(KEY_SHOW_TIMER_ATTACK);
+    g_timerTime = event.GetInt(KEY_TIMER_TIME);
+    g_finalEvent = event.GetInt(KEY_FINAL_EVENT);
+    g_categoryLeft = event.GetInt(KEY_CATEGORY_LEFT);
+    g_left1 = event.GetInt(KEY_LEFT_1);
+    g_leftScore1 = event.GetInt(KEY_LEFT_SCORE_1);
+    g_left2 = event.GetInt(KEY_LEFT_2);
+    g_leftScore2 = event.GetInt(KEY_LEFT_SCORE_2);
+    g_left3 = event.GetInt(KEY_LEFT_3);
+    g_leftScore3 = event.GetInt(KEY_LEFT_SCORE_3);
+    g_categoryRight = event.GetInt(KEY_CATEGORY_RIGHT);
+    g_right1 = event.GetInt(KEY_RIGHT_1);
+    g_rightScore1 = event.GetInt(KEY_RIGHT_SCORE_1);
+    g_right2 = event.GetInt(KEY_RIGHT_2);
+    g_rightScore2 = event.GetInt(KEY_RIGHT_SCORE_2);
+    g_right3 = event.GetInt(KEY_RIGHT_3);
+    g_rightScore3 = event.GetInt(KEY_RIGHT_SCORE_3);
 }
 
 public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) {
@@ -68,38 +68,38 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
         return;
     }
 
-    int userId = event.GetInt("userid");
+    int userId = event.GetInt(KEY_USER_ID);
 
     Timer_ShowWinPanel(userId);
 }
 
 void Event_FireRoundWin(int client) {
-    Event event = CreateEvent("dod_round_win");
+    Event event = CreateEvent(EVENT_ROUND_WIN);
 
-    event.SetInt("team", g_winTeam);
+    event.SetInt(KEY_TEAM, g_winTeam);
     event.FireToClient(client);
 }
 
 void Event_FireWinPanel(int client) {
-    Event event = CreateEvent("dod_win_panel");
+    Event event = CreateEvent(EVENT_WIN_PANEL);
 
-    event.SetBool("show_timer_defend", g_showTimerDefend);
-    event.SetBool("show_timer_attack", g_showTimerAttack);
-    event.SetInt("timer_time", g_timerTime);
-    event.SetInt("final_event", g_finalEvent);
-    event.SetInt("category_left", g_categoryLeft);
-    event.SetInt("left_1", g_left1);
-    event.SetInt("left_score_1", g_leftScore1);
-    event.SetInt("left_2", g_left2);
-    event.SetInt("left_score_2", g_leftScore2);
-    event.SetInt("left_3", g_left3);
-    event.SetInt("left_score_3", g_leftScore3);
-    event.SetInt("category_right", g_categoryRight);
-    event.SetInt("right_1", g_right1);
-    event.SetInt("right_score_1", g_rightScore1);
-    event.SetInt("right_2", g_right2);
-    event.SetInt("right_score_2", g_rightScore2);
-    event.SetInt("right_3", g_right3);
-    event.SetInt("right_score_3", g_rightScore3);
+    event.SetBool(KEY_SHOW_TIMER_DEFEND, g_showTimerDefend);
+    event.SetBool(KEY_SHOW_TIMER_ATTACK, g_showTimerAttack);
+    event.SetInt(KEY_TIMER_TIME, g_timerTime);
+    event.SetInt(KEY_FINAL_EVENT, g_finalEvent);
+    event.SetInt(KEY_CATEGORY_LEFT, g_categoryLeft);
+    event.SetInt(KEY_LEFT_1, g_left1);
+    event.SetInt(KEY_LEFT_SCORE_1, g_leftScore1);
+    event.SetInt(KEY_LEFT_2, g_left2);
+    event.SetInt(KEY_LEFT_SCORE_2, g_leftScore2);
+    event.SetInt(KEY_LEFT_3, g_left3);
+    event.SetInt(KEY_LEFT_SCORE_3, g_leftScore3);
+    event.SetInt(KEY_CATEGORY_RIGHT, g_categoryRight);
+    event.SetInt(KEY_RIGHT_1, g_right1);
+    event.SetInt(KEY_RIGHT_SCORE_1, g_rightScore1);
+    event.SetInt(KEY_RIGHT_2, g_right2);
+    event.SetInt(KEY_RIGHT_SCORE_2, g_rightScore2);
+    event.SetInt(KEY_RIGHT_3, g_right3);
+    event.SetInt(KEY_RIGHT_SCORE_3 , g_rightScore3);
     event.FireToClient(client);
 }
