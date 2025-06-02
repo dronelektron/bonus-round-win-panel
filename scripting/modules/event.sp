@@ -28,17 +28,17 @@ void Event_ResetWinTeam() {
 }
 
 void Event_Create() {
-    HookEvent(EVENT_ROUND_WIN, Event_RoundWin);
-    HookEvent(EVENT_ROUND_START, Event_RoundStart);
+    HookEvent(EVENT_ROUND_WIN, OnRoundWin);
+    HookEvent(EVENT_ROUND_START, OnRoundStart);
     HookEvent(EVENT_WIN_PANEL, Event_WinPanel);
     HookEvent(EVENT_PLAYER_SPAWN, Event_PlayerSpawn);
 }
 
-public void Event_RoundWin(Event event, const char[] name, bool dontBroadcast) {
+static void OnRoundWin(Event event, const char[] name, bool dontBroadcast) {
     g_winTeam = event.GetInt(KEY_TEAM);
 }
 
-public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast) {
+static void OnRoundStart(Event event, const char[] name, bool dontBroadcast) {
     Event_ResetWinTeam();
 }
 
@@ -78,6 +78,8 @@ void Event_FireRoundWin(int client) {
 
     event.SetInt(KEY_TEAM, g_winTeam);
     event.FireToClient(client);
+
+    CloseHandle(event);
 }
 
 void Event_FireWinPanel(int client) {
@@ -102,4 +104,6 @@ void Event_FireWinPanel(int client) {
     event.SetInt(KEY_RIGHT_3, g_right3);
     event.SetInt(KEY_RIGHT_SCORE_3 , g_rightScore3);
     event.FireToClient(client);
+
+    CloseHandle(event);
 }
