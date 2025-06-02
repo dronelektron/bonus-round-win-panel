@@ -78,6 +78,8 @@ void Event_FireRoundWin(int client) {
 
     event.SetInt(KEY_TEAM, g_winTeam);
     event.FireToClient(client);
+
+    CloseHandle(event);
 }
 
 void Event_FireWinPanel(int client) {
@@ -102,4 +104,6 @@ void Event_FireWinPanel(int client) {
     event.SetInt(KEY_RIGHT_3, g_right3);
     event.SetInt(KEY_RIGHT_SCORE_3 , g_rightScore3);
     event.FireToClient(client);
+
+    CloseHandle(event);
 }
